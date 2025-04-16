@@ -1,0 +1,39 @@
+package dev.iad.portfoliowebsite.pagescomponents.index
+
+import androidx.compose.runtime.Composable
+import com.varabyte.kobweb.compose.foundation.layout.Column
+import com.varabyte.kobweb.compose.ui.Modifier
+import com.varabyte.kobweb.compose.ui.modifiers.fillMaxWidth
+import com.varabyte.kobweb.compose.ui.modifiers.position
+import com.varabyte.kobweb.compose.ui.modifiers.right
+import com.varabyte.kobweb.compose.ui.modifiers.top
+import dev.iad.portfoliowebsite.components.PageLayout
+import dev.iad.portfoliowebsite.pagescomponents.index.sections.AboutMeSection
+import dev.iad.portfoliowebsite.pagescomponents.index.sections.HeroSection
+import dev.iad.portfoliowebsite.pagescomponents.index.sections.Nav
+import dev.iad.portfoliowebsite.pagescomponents.index.sections.ProjectsSection
+import dev.iad.portfoliowebsite.pagescomponents.index.sections.ResumeSection
+import dev.iad.portfoliowebsite.widgets.VerticalSpacer
+import org.jetbrains.compose.web.css.Position
+import org.jetbrains.compose.web.css.cssRem
+
+@Composable
+fun IndexPageContent() {
+    PageLayout {
+        Column(modifier = Modifier.fillMaxWidth()) {
+            HeroSection()
+            VerticalSpacer(value = 10.cssRem)
+            AboutMeSection()
+            ResumeSection()
+            ProjectsSection()
+            VerticalSpacer(value = 10.cssRem)
+        }
+        Nav(
+            modifier = Modifier
+                .position(position = Position.Fixed)
+                .top(value = 1.cssRem)
+                .right(value = 1.cssRem),
+        )
+    }
+}
+

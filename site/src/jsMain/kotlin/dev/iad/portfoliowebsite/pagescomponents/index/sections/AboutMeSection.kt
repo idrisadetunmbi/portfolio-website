@@ -6,6 +6,7 @@ import com.varabyte.kobweb.compose.css.ObjectFit
 import com.varabyte.kobweb.compose.css.TextAlign
 import com.varabyte.kobweb.compose.css.TextTransform
 import com.varabyte.kobweb.compose.foundation.layout.Column
+import com.varabyte.kobweb.compose.foundation.layout.Row
 import com.varabyte.kobweb.compose.ui.Alignment
 import com.varabyte.kobweb.compose.ui.Modifier
 import com.varabyte.kobweb.compose.ui.modifiers.borderRadius
@@ -21,6 +22,7 @@ import com.varabyte.kobweb.compose.ui.modifiers.width
 import com.varabyte.kobweb.silk.components.graphics.Image
 import com.varabyte.kobweb.silk.components.layout.HorizontalDivider
 import com.varabyte.kobweb.silk.components.text.SpanText
+import dev.iad.portfoliowebsite.components.SocialLinks
 import dev.iad.portfoliowebsite.widgets.VerticalSpacer
 import org.jetbrains.compose.web.css.cssRem
 import org.jetbrains.compose.web.css.percent
@@ -41,6 +43,14 @@ internal fun AboutMeSection() {
         )
         VerticalSpacer(value = 2.cssRem)
         SpanText(
+            text = "IDRIS ADETUNMBI",
+            modifier = Modifier
+                .fontSize(value = 1.75.cssRem)
+                .fontWeight(value = FontWeight.Medium)
+                .letterSpacing(value = .375.cssRem),
+        )
+        VerticalSpacer(value = 2.cssRem)
+        SpanText(
             text = "about me",
             modifier = Modifier
                 .textTransform(textTransform = TextTransform.Uppercase)
@@ -48,7 +58,7 @@ internal fun AboutMeSection() {
                 .letterSpacing(value = .125.cssRem),
         )
         VerticalSpacer(value = 1.cssRem)
-        HorizontalDivider(modifier = Modifier.width(1.5.cssRem))
+        HorizontalDivider(modifier = Modifier.width(size = 1.5.cssRem))
         VerticalSpacer(value = 1.5.cssRem)
         SpanText(
             text = "Software Engineer with 7+ Years of Experience in Diverse Teams, Industries and Technologies",
@@ -57,6 +67,10 @@ internal fun AboutMeSection() {
                 .textAlign(textAlign = TextAlign.Center)
                 .fontWeight(value = FontWeight.Light),
         )
+        VerticalSpacer(value = 1.5.cssRem)
+        Row {
+            SocialLinks()
+        }
         VerticalSpacer(value = 10.cssRem)
     }
 }

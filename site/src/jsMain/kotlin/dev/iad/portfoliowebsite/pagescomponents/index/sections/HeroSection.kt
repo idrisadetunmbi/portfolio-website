@@ -26,14 +26,11 @@ import com.varabyte.kobweb.compose.ui.modifiers.width
 import com.varabyte.kobweb.silk.components.forms.Button
 import com.varabyte.kobweb.silk.components.graphics.Image
 import com.varabyte.kobweb.silk.components.icons.ArrowForwardIcon
-import com.varabyte.kobweb.silk.components.icons.fa.FaGithub
-import com.varabyte.kobweb.silk.components.icons.fa.FaLinkedinIn
-import com.varabyte.kobweb.silk.components.icons.fa.FaXTwitter
 import com.varabyte.kobweb.silk.components.layout.VerticalDivider
-import com.varabyte.kobweb.silk.components.navigation.Link
 import com.varabyte.kobweb.silk.components.text.SpanText
 import com.varabyte.kobweb.silk.theme.colors.ColorMode
 import dev.iad.portfoliowebsite.UncoloredButtonVariant
+import dev.iad.portfoliowebsite.components.SocialLinks
 import dev.iad.portfoliowebsite.toSitePalette
 import dev.iad.portfoliowebsite.widgets.HorizontalSpacer
 import dev.iad.portfoliowebsite.widgets.VerticalSpacer
@@ -152,26 +149,7 @@ private fun LinksContent() {
                 .color(color = ColorMode.current.toSitePalette().contentAlt),
         )
         VerticalSpacer(value = .5.cssRem)
-        Link(
-            path = "https://github.com/idrisadetunmbi",
-            modifier = Modifier.color(ColorMode.current.toSitePalette().contentAlt)
-        ) {
-            FaGithub()
-        }
-        VerticalSpacer(value = .25.cssRem)
-        Link(
-            path = "https://linkedin.com/in/idris-adetunmbi",
-            modifier = Modifier.color(ColorMode.current.toSitePalette().contentAlt)
-        ) {
-            FaLinkedinIn()
-        }
-        VerticalSpacer(value = .25.cssRem)
-        Link(
-            path = "https://x.com/idrisadetunmbi",
-            modifier = Modifier.color(ColorMode.current.toSitePalette().contentAlt)
-        ) {
-            FaXTwitter()
-        }
+        SocialLinks()
     }
 }
 

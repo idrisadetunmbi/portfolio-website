@@ -15,7 +15,7 @@ import org.jetbrains.compose.web.css.percent
 @Composable
 fun PageLayout(content: @Composable () -> Unit) {
 
-    LaunchedEffect(Unit) {
+    LaunchedEffect(key1 = Unit) {
         document.title = "Idris Adetunmbi - Software Engineer"
     }
 

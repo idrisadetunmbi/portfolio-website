@@ -6,6 +6,7 @@ import com.varabyte.kobweb.compose.ui.Modifier
 import com.varabyte.kobweb.compose.ui.modifiers.fillMaxWidth
 import dev.iad.portfoliowebsite.components.PageLayout
 import dev.iad.portfoliowebsite.pagescomponents.index.sections.AboutMeSection
+import dev.iad.portfoliowebsite.pagescomponents.index.sections.ContactSection
 import dev.iad.portfoliowebsite.pagescomponents.index.sections.ProjectsSection
 import dev.iad.portfoliowebsite.pagescomponents.index.sections.ResumeSection
 import dev.iad.portfoliowebsite.widgets.VerticalSpacer
@@ -19,14 +20,7 @@ fun IndexPageContent() {
             AboutMeSection()
             ResumeSection()
             ProjectsSection()
-            VerticalSpacer(value = 10.cssRem)
+            ContactSection()
         }
-//        Nav(
-//            modifier = Modifier
-//                .position(position = Position.Fixed)
-//                .top(value = 1.cssRem)
-//                .right(value = 1.cssRem),
-//        )
     }
 }
-

@@ -22,6 +22,7 @@ import com.varabyte.kobweb.silk.components.text.SpanText
 import org.jetbrains.compose.web.css.CSSColorValue
 import org.jetbrains.compose.web.css.Color
 import org.jetbrains.compose.web.css.cssRem
+import org.jetbrains.compose.web.css.percent
 
 @Composable
 internal fun SectionScaffold(
@@ -37,7 +38,9 @@ internal fun SectionScaffold(
         contentAlignment = Alignment.Center,
     ) {
         Column(
-            modifier = Modifier.maxWidth(size = 82.5.cssRem),
+            modifier = Modifier
+                .width(size = 100.percent)
+                .maxWidth(size = 82.5.cssRem),
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
             Box(modifier = Modifier.height(size = 6.5.cssRem))

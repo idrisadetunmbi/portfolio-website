@@ -68,7 +68,7 @@ internal fun AboutMeSection() {
                 .fontWeight(value = FontWeight.Light),
         )
         VerticalSpacer(value = 1.5.cssRem)
-        Row {
+        Row(verticalAlignment = Alignment.CenterVertically) {
             SocialLinks()
         }
         VerticalSpacer(value = 10.cssRem)

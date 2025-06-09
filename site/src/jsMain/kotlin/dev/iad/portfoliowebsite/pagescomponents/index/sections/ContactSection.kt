@@ -65,7 +65,7 @@ internal fun ContactSection() {
 
     SectionScaffold(
         title = "contact",
-        subtitle = "Send me a message.",
+        subtitle = "Let's build together.",
         backgroundColor = ColorMode.current.toSitePalette().backgroundAlt,
     ) {
         Column(
@@ -105,7 +105,7 @@ internal fun ContactSection() {
                 modifier = SubmitButtonStyle.toModifier(),
                 onClick = handleSubmitClick,
             ) {
-                SpanText(text = "send message")
+                SpanText(text = "start the conversation")
             }
         }
         VerticalSpacer(value = 10.cssRem)

@@ -16,7 +16,7 @@ import org.jetbrains.compose.web.css.cssRem
 fun IndexPageContent() {
     PageLayout {
         Column(modifier = Modifier.fillMaxWidth()) {
-            VerticalSpacer(value = 12.cssRem)
+            VerticalSpacer(value = 10.cssRem)
             AboutMeSection()
             ResumeSection()
             ProjectsSection()

@@ -5,6 +5,7 @@ import com.varabyte.kobweb.compose.css.FontWeight
 import com.varabyte.kobweb.compose.css.ObjectFit
 import com.varabyte.kobweb.compose.css.TextAlign
 import com.varabyte.kobweb.compose.css.TextTransform
+import com.varabyte.kobweb.compose.css.WhiteSpace
 import com.varabyte.kobweb.compose.foundation.layout.Column
 import com.varabyte.kobweb.compose.foundation.layout.Row
 import com.varabyte.kobweb.compose.ui.Alignment
@@ -18,6 +19,7 @@ import com.varabyte.kobweb.compose.ui.modifiers.maxWidth
 import com.varabyte.kobweb.compose.ui.modifiers.objectFit
 import com.varabyte.kobweb.compose.ui.modifiers.textAlign
 import com.varabyte.kobweb.compose.ui.modifiers.textTransform
+import com.varabyte.kobweb.compose.ui.modifiers.whiteSpace
 import com.varabyte.kobweb.compose.ui.modifiers.width
 import com.varabyte.kobweb.silk.components.graphics.Image
 import com.varabyte.kobweb.silk.components.layout.HorizontalDivider
@@ -60,17 +62,32 @@ internal fun AboutMeSection() {
         VerticalSpacer(value = 1.cssRem)
         HorizontalDivider(modifier = Modifier.width(size = 1.5.cssRem))
         VerticalSpacer(value = 1.5.cssRem)
-        SpanText(
-            text = "Software Engineer with 7+ Years of Experience in Diverse Teams, Industries and Technologies",
+        Column(
             modifier = Modifier
                 .maxWidth(size = 36.cssRem)
                 .textAlign(textAlign = TextAlign.Center)
+                .whiteSpace(whiteSpace = WhiteSpace.PreLine)
                 .fontWeight(value = FontWeight.Light),
-        )
-        VerticalSpacer(value = 1.5.cssRem)
+        ) {
+            SpanText(
+                text = HEADLINE_TEXT,
+                modifier = Modifier.fontSize(value = 1.125.cssRem),
+            )
+            SpanText(
+                text = SUBHEADLINE_TEXT,
+                modifier = Modifier.fontSize(value = .875.cssRem),
+            )
+        }
+        VerticalSpacer(value = 2.5.cssRem)
         Row(verticalAlignment = Alignment.CenterVertically) {
             SocialLinks()
         }
         VerticalSpacer(value = 10.cssRem)
     }
 }
+
+private const val HEADLINE_TEXT =
+    "Senior Frontend Engineer (Cross-Platform) with 7+ Years of Experience Contributing to Cross-Functional Product Success\n\n"
+
+private const val SUBHEADLINE_TEXT =
+    "Skilled in collaborating with product, backend, and data teams to build user-centric solutions that meet business goals—proven across diverse industries and teams."

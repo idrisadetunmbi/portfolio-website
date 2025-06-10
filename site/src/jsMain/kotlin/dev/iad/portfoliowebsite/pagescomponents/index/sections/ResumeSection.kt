@@ -45,12 +45,12 @@ internal fun ResumeSection() {
         backgroundColor = ColorMode.current.toSitePalette().backgroundAlt,
     ) {
         VerticalSpacer(value = 2.cssRem)
-        experiences.forEachIndexed { index, experienceData ->
+        EXPERIENCES.forEachIndexed { index, experienceData ->
             Experience(
                 contentPosition = if (index % 2 == 0) ContentPosition.START else ContentPosition.END,
                 data = experienceData,
             )
-            if (index != experiences.lastIndex) {
+            if (index != EXPERIENCES.lastIndex) {
                 ExperienceDivider()
             }
         }
@@ -146,7 +146,7 @@ enum class ContentPosition {
     START, END
 }
 
-private val experiences = listOf(
+private val EXPERIENCES = listOf(
     ExperienceData(
         company = "trivago",
         position = "Mobile Software Engineer III",

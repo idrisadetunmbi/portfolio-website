@@ -27,6 +27,7 @@ import com.varabyte.kobweb.silk.components.forms.InputGroup
 import com.varabyte.kobweb.silk.components.forms.InputSize
 import com.varabyte.kobweb.silk.components.text.SpanText
 import com.varabyte.kobweb.silk.style.CssStyle
+import com.varabyte.kobweb.silk.style.breakpoint.Breakpoint
 import com.varabyte.kobweb.silk.style.toModifier
 import com.varabyte.kobweb.silk.theme.colors.ColorMode
 import dev.iad.portfoliowebsite.pagescomponents.index.components.SectionScaffold
@@ -69,7 +70,7 @@ internal fun ContactSection() {
         backgroundColor = ColorMode.current.toSitePalette().backgroundAlt,
     ) {
         Column(
-            modifier = Modifier.width(size = 50.percent),
+            modifier = ContainerStyle.toModifier(),
             ref = ref { rootElementRef = it },
         ) {
             VerticalSpacer(value = 1.cssRem)
@@ -152,6 +153,18 @@ private fun ContactFormInputField(
                 else Modifier,
             ),
         )
+    }
+}
+
+val ContainerStyle = CssStyle {
+    base {
+        Modifier
+            .width(size = 100.percent)
+            .padding(leftRight = 2.cssRem)
+    }
+
+    Breakpoint.MD {
+        Modifier.width(size = 50.percent)
     }
 }
 

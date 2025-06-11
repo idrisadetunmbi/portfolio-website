@@ -10,7 +10,6 @@ import com.varabyte.kobweb.compose.foundation.layout.Row
 import com.varabyte.kobweb.compose.ui.Alignment
 import com.varabyte.kobweb.compose.ui.Modifier
 import com.varabyte.kobweb.compose.ui.modifiers.backgroundColor
-import com.varabyte.kobweb.compose.ui.modifiers.border
 import com.varabyte.kobweb.compose.ui.modifiers.borderRadius
 import com.varabyte.kobweb.compose.ui.modifiers.color
 import com.varabyte.kobweb.compose.ui.modifiers.fillMaxWidth
@@ -22,7 +21,6 @@ import com.varabyte.kobweb.compose.ui.modifiers.padding
 import com.varabyte.kobweb.compose.ui.modifiers.size
 import com.varabyte.kobweb.compose.ui.modifiers.textTransform
 import com.varabyte.kobweb.compose.ui.modifiers.width
-import com.varabyte.kobweb.silk.components.forms.Button
 import com.varabyte.kobweb.silk.components.layout.VerticalDivider
 import com.varabyte.kobweb.silk.components.text.SpanText
 import com.varabyte.kobweb.silk.theme.colors.ColorMode
@@ -30,12 +28,9 @@ import dev.iad.portfoliowebsite.pagescomponents.index.components.SectionScaffold
 import dev.iad.portfoliowebsite.toSitePalette
 import dev.iad.portfoliowebsite.widgets.HorizontalSpacer
 import dev.iad.portfoliowebsite.widgets.VerticalSpacer
-import kotlinx.browser.window
 import org.jetbrains.compose.web.css.Color
-import org.jetbrains.compose.web.css.LineStyle
 import org.jetbrains.compose.web.css.cssRem
 import org.jetbrains.compose.web.css.percent
-import org.jetbrains.compose.web.css.px
 
 private val EXPERIENCES = listOf(
     ExperienceData(
@@ -93,21 +88,6 @@ internal fun ResumeSection() {
                 ExperienceDivider()
             }
         }
-        VerticalSpacer(value = 4.cssRem)
-        Button(
-            onClick = {
-                window.open(url = "CV.pdf", target = "_blank")
-            },
-            content = {
-                SpanText(text = "Download Full Resume")
-            },
-            modifier = Modifier
-                .backgroundColor(color = Color.transparent)
-                .textTransform(textTransform = TextTransform.Uppercase)
-                .letterSpacing(value = .0625.cssRem)
-                .border(width = 1.px, style = LineStyle.Solid, color = Color.white)
-                .fontSize(value = .820.cssRem),
-        )
     }
 }
 

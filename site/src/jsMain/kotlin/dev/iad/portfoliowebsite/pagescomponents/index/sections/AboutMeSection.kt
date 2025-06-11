@@ -29,6 +29,12 @@ import dev.iad.portfoliowebsite.widgets.VerticalSpacer
 import org.jetbrains.compose.web.css.cssRem
 import org.jetbrains.compose.web.css.percent
 
+private const val HEADLINE_TEXT =
+    "Senior Frontend Engineer (Cross-Platform) with 7+ Years of Experience Contributing to Cross-Functional Product Success\n\n"
+
+private const val SUBHEADLINE_TEXT =
+    "Skilled in collaborating with product, backend, and data teams to build user-centric solutions that meet business goals—proven across diverse industries and teams."
+
 @Composable
 internal fun AboutMeSection() {
     Column(
@@ -85,9 +91,3 @@ internal fun AboutMeSection() {
         VerticalSpacer(value = 10.cssRem)
     }
 }
-
-private const val HEADLINE_TEXT =
-    "Senior Frontend Engineer (Cross-Platform) with 7+ Years of Experience Contributing to Cross-Functional Product Success\n\n"
-
-private const val SUBHEADLINE_TEXT =
-    "Skilled in collaborating with product, backend, and data teams to build user-centric solutions that meet business goals—proven across diverse industries and teams."

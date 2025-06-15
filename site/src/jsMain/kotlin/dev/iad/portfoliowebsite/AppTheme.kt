@@ -13,8 +13,8 @@ import com.varabyte.kobweb.compose.ui.graphics.Color as KobwebColor
 
 @Suppress("UnusedReceiverParameter")
 fun ColorMode.toSitePalette() = SitePalette(
-    background = Color.rgb(0x13171F),
-    backgroundAlt = KobwebColor.rgb(16, 16, 16),
+    background = Color.rgb(value = 0x13171F),
+    backgroundAlt = KobwebColor.rgb(r = 16, g = 16, b = 16),
     content = Color.rgb(0xFFFFFF),
     contentAlt = Color.rgb(0x898989),
 )

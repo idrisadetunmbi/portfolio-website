@@ -14,10 +14,12 @@ import com.varabyte.kobweb.compose.foundation.layout.Box
 import com.varabyte.kobweb.compose.foundation.layout.Row
 import com.varabyte.kobweb.compose.ui.Alignment
 import com.varabyte.kobweb.compose.ui.Modifier
+import com.varabyte.kobweb.compose.ui.graphics.Colors
 import com.varabyte.kobweb.compose.ui.modifiers.backgroundColor
 import com.varabyte.kobweb.compose.ui.modifiers.border
 import com.varabyte.kobweb.compose.ui.modifiers.borderRadius
 import com.varabyte.kobweb.compose.ui.modifiers.color
+import com.varabyte.kobweb.compose.ui.modifiers.display
 import com.varabyte.kobweb.compose.ui.modifiers.fillMaxSize
 import com.varabyte.kobweb.compose.ui.modifiers.fillMaxWidth
 import com.varabyte.kobweb.compose.ui.modifiers.fontSize
@@ -26,14 +28,17 @@ import com.varabyte.kobweb.compose.ui.modifiers.id
 import com.varabyte.kobweb.compose.ui.modifiers.letterSpacing
 import com.varabyte.kobweb.compose.ui.modifiers.lineHeight
 import com.varabyte.kobweb.compose.ui.modifiers.margin
+import com.varabyte.kobweb.compose.ui.modifiers.minWidth
 import com.varabyte.kobweb.compose.ui.modifiers.objectFit
 import com.varabyte.kobweb.compose.ui.modifiers.onMouseEnter
 import com.varabyte.kobweb.compose.ui.modifiers.onMouseLeave
 import com.varabyte.kobweb.compose.ui.modifiers.padding
 import com.varabyte.kobweb.compose.ui.modifiers.position
+import com.varabyte.kobweb.compose.ui.modifiers.right
 import com.varabyte.kobweb.compose.ui.modifiers.size
 import com.varabyte.kobweb.compose.ui.modifiers.textAlign
 import com.varabyte.kobweb.compose.ui.modifiers.textTransform
+import com.varabyte.kobweb.compose.ui.modifiers.top
 import com.varabyte.kobweb.compose.ui.modifiers.transform
 import com.varabyte.kobweb.compose.ui.modifiers.transition
 import com.varabyte.kobweb.compose.ui.modifiers.whiteSpace
@@ -41,6 +46,9 @@ import com.varabyte.kobweb.compose.ui.modifiers.width
 import com.varabyte.kobweb.navigation.OpenLinkStrategy
 import com.varabyte.kobweb.silk.components.forms.Button
 import com.varabyte.kobweb.silk.components.graphics.Image
+import com.varabyte.kobweb.silk.components.icons.fa.FaInfo
+import com.varabyte.kobweb.silk.components.icons.fa.FaXmark
+import com.varabyte.kobweb.silk.components.icons.fa.IconSize
 import com.varabyte.kobweb.silk.components.layout.SimpleGrid
 import com.varabyte.kobweb.silk.components.layout.numColumns
 import com.varabyte.kobweb.silk.components.navigation.Link
@@ -60,6 +68,7 @@ import org.jetbrains.compose.web.css.CSSColorValue
 import org.jetbrains.compose.web.css.CSSUnit
 import org.jetbrains.compose.web.css.CSSUnitValueTyped
 import org.jetbrains.compose.web.css.Color
+import org.jetbrains.compose.web.css.DisplayStyle
 import org.jetbrains.compose.web.css.LineStyle
 import org.jetbrains.compose.web.css.Position
 import org.jetbrains.compose.web.css.cssRem
@@ -142,7 +151,7 @@ private fun ProjectFilterButton(
 
 @Composable
 private fun ProjectItem(project: Project) {
-    var hovered by remember { mutableStateOf(value = false) }
+    var infoVisible by remember { mutableStateOf(value = false) }
 
     Link(
         path = project.link,
@@ -150,18 +159,18 @@ private fun ProjectItem(project: Project) {
         modifier = ProjectLinkStyle
             .toModifier()
             .onMouseEnter(listener = {
-                hovered = true
+                 infoVisible = true
             })
             .onMouseLeave(listener = {
-                hovered = false
+                 infoVisible = false
             }),
     ) {
         Box(
             modifier = ProjectContentContainerStyle.toModifier()
-                .then(other = if (hovered) Modifier.transform { rotateY(a = 180.deg) } else Modifier)
+                .then(other = if (infoVisible) Modifier.transform { rotateY(a = 180.deg) } else Modifier)
                 .id(value = "inner"),
         ) {
-            if (hovered) {
+            if (infoVisible) {
                 Box(
                     modifier = ProjectContentStyle
                         .toModifier()
@@ -193,7 +202,32 @@ private fun ProjectItem(project: Project) {
                     )
                 }
             }
-
+        }
+        if (infoVisible) {
+            Button(
+                modifier = BaseProjectInfoToggleButtonStyle.toModifier()
+                    .then(
+                        other = Modifier.size(size = 2.cssRem)
+                            .backgroundColor(color = Colors.Transparent)
+                    ),
+                onClick = {
+                    it.preventDefault()
+                    infoVisible = false
+                },
+            ) {
+                FaXmark(size = IconSize.LG)
+            }
+        } else {
+            Button(
+                modifier = BaseProjectInfoToggleButtonStyle.toModifier()
+                    .then(other = ProjectInfoToggleButtonStyle.toModifier()),
+                onClick = {
+                    it.preventDefault()
+                    infoVisible = true
+                },
+            ) {
+                FaInfo(size = IconSize.XS)
+            }
         }
     }
 }
@@ -217,6 +251,7 @@ val ProjectLinkStyle = CssStyle {
             .padding(leftRight = 1.5.cssRem)
             .color(color = Color.white)
             .backgroundColor(color = Color.transparent)
+            .position(position = Position.Relative)
     }
 
     Breakpoint.MD {
@@ -238,6 +273,49 @@ val ProjectContentContainerStyle = CssStyle {
                     duration = CSSUnitValueTyped(value = 0.4F, unit = CSSUnit.s)
                 ),
             )
+    }
+}
+
+val BaseProjectInfoToggleButtonStyle = CssStyle {
+    base {
+        Modifier
+            .position(position = Position.Absolute)
+            .top(value = .75.cssRem)
+            .right(value = 2.125.cssRem)
+            .color(color = colorMode.toSitePalette().content)
+            .minWidth(size = 0.cssRem)
+            .padding(all = 0.cssRem)
+    }
+    Breakpoint.MD {
+        Modifier.display(value = DisplayStyle.None)
+    }
+}
+
+val ProjectInfoToggleButtonStyle = CssStyle {
+    base {
+        Modifier
+            .border {
+                style(lineStyle = LineStyle.Solid)
+                color(color = colorMode.toSitePalette().content)
+                width(width = .1.cssRem)
+            }
+            .borderRadius(r = 100.percent)
+            .backgroundColor(color = colorMode.toSitePalette().contentAlt)
+            .size(size = 1.5.cssRem)
+    }
+}
+
+val ProjectInfoUntoggleButtonStyle = CssStyle {
+    base {
+        Modifier
+            .border {
+                style(lineStyle = LineStyle.Solid)
+                color(color = colorMode.toSitePalette().content)
+                width(width = .1.cssRem)
+            }
+            .borderRadius(r = 100.percent)
+            .backgroundColor(color = colorMode.toSitePalette().contentAlt)
+            .size(size = 1.5.cssRem)
     }
 }
 

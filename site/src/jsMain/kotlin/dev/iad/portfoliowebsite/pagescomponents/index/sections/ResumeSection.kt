@@ -29,6 +29,8 @@ import com.varabyte.kobweb.silk.style.CssStyle
 import com.varabyte.kobweb.silk.style.breakpoint.Breakpoint
 import com.varabyte.kobweb.silk.style.toModifier
 import com.varabyte.kobweb.silk.theme.colors.ColorMode
+import dev.iad.portfoliowebsite.data.EXPERIENCES
+import dev.iad.portfoliowebsite.models.Experience
 import dev.iad.portfoliowebsite.pagescomponents.index.components.SectionScaffold
 import dev.iad.portfoliowebsite.toSitePalette
 import dev.iad.portfoliowebsite.widgets.HorizontalSpacer
@@ -37,45 +39,6 @@ import org.jetbrains.compose.web.css.Color
 import org.jetbrains.compose.web.css.DisplayStyle
 import org.jetbrains.compose.web.css.cssRem
 import org.jetbrains.compose.web.css.percent
-
-private val EXPERIENCES = listOf(
-    ExperienceData(
-        company = "trivago",
-        position = "Mobile Software Engineer III",
-        summary = "Developed and enhanced the trivago hotel search Android app within a cross-functional team, leading tech initiatives and mentoring peers.",
-        end = "present",
-        start = "2022"
-    ),
-    ExperienceData(
-        company = "Headspace Care",
-        position = "Senior Software Engineer",
-        summary = "In addition to developing and improving the Ginger Care mobile app, handling features including user and content management, I created and reviewed technical design documents, resolved user issues and enhanced their experiences through journey analysis and logging.",
-        end = "2022",
-        start = "2021"
-    ),
-    ExperienceData(
-        company = "Autochek Africa",
-        position = "Android Engineer",
-        summary = "Worked in a startup team to develop and release the Autocheck car marketplace Android app including features as ad-placements/uploads, financing application process, purchase payments, user authentication, etc.",
-        end = "2021",
-        start = "2020"
-    ),
-    ExperienceData(
-        company = "Andela <> Intentional Futures",
-        position = "Software Engineer",
-        summary = "Proceeded through the Andela apprenticeship program to work with Intentional Futures developing multiple web and full-stack projects.",
-        end = "2021",
-        start = "2017"
-    )
-)
-
-private data class ExperienceData(
-    val company: String,
-    val position: String,
-    val summary: String,
-    val end: String,
-    val start: String,
-)
 
 @Composable
 internal fun ResumeSection() {
@@ -123,7 +86,7 @@ private fun ExperiencesMobileContent() {
 @Composable
 private fun ExperienceDesktopContentRow(
     contentPosition: ContentPosition,
-    data: ExperienceData,
+    data: Experience,
 ) {
     Row(
         modifier = Modifier.fillMaxWidth().padding(leftRight = 4.cssRem),
@@ -141,7 +104,7 @@ private fun ExperienceDesktopContentRow(
 }
 
 @Composable
-private fun ExperienceContent(data: ExperienceData) {
+private fun ExperienceContent(data: Experience) {
     Column(modifier = ExperienceContentStyle.toModifier()) {
         SpanText(
             text = data.company,

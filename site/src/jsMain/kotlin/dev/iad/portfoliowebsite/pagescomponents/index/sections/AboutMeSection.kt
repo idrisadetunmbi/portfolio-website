@@ -12,6 +12,7 @@ import com.varabyte.kobweb.compose.foundation.layout.Row
 import com.varabyte.kobweb.compose.ui.Alignment
 import com.varabyte.kobweb.compose.ui.Modifier
 import com.varabyte.kobweb.compose.ui.modifiers.borderRadius
+import com.varabyte.kobweb.compose.ui.modifiers.color
 import com.varabyte.kobweb.compose.ui.modifiers.fillMaxWidth
 import com.varabyte.kobweb.compose.ui.modifiers.fontSize
 import com.varabyte.kobweb.compose.ui.modifiers.fontWeight
@@ -25,9 +26,13 @@ import com.varabyte.kobweb.compose.ui.modifiers.textTransform
 import com.varabyte.kobweb.compose.ui.modifiers.whiteSpace
 import com.varabyte.kobweb.compose.ui.modifiers.width
 import com.varabyte.kobweb.silk.components.graphics.Image
+import com.varabyte.kobweb.silk.components.icons.fa.FaLocationDot
 import com.varabyte.kobweb.silk.components.layout.HorizontalDivider
 import com.varabyte.kobweb.silk.components.text.SpanText
+import com.varabyte.kobweb.silk.theme.colors.ColorMode
 import dev.iad.portfoliowebsite.components.SocialLinks
+import dev.iad.portfoliowebsite.toSitePalette
+import dev.iad.portfoliowebsite.widgets.HorizontalSpacer
 import dev.iad.portfoliowebsite.widgets.VerticalSpacer
 import org.jetbrains.compose.web.css.cssRem
 import org.jetbrains.compose.web.css.percent
@@ -97,6 +102,23 @@ internal fun AboutMeSection() {
         VerticalSpacer(value = 2.5.cssRem)
         Row(verticalAlignment = Alignment.CenterVertically) {
             SocialLinks()
+        }
+        VerticalSpacer(value = 2.5.cssRem)
+        Row(
+            verticalAlignment = Alignment.CenterVertically,
+            modifier = Modifier.color(color = ColorMode.current.toSitePalette().contentAlt)
+        ) {
+            FaLocationDot()
+            HorizontalSpacer(value = .75.cssRem)
+            SpanText(
+                text = "Düsseldorf, Germany",
+                modifier = Modifier
+                    .fontSize(value = .75.cssRem)
+                    .textTransform(textTransform = TextTransform.Uppercase)
+                    .letterSpacing(value = .10.cssRem)
+                    .whiteSpace(whiteSpace = WhiteSpace.PreLine)
+                    .textAlign(textAlign = TextAlign.Center)
+            )
         }
     }
 }

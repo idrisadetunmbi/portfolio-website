@@ -118,7 +118,7 @@ private fun createMailToLink(
     subject: String,
     message: String,
 ): String = buildString {
-    append("mailto:idris.adetunmbi@icloud.com?")
+    append("mailto:contact@idrisadetunmbi.dev?")
     append("subject=$subject&")
     append("body=$message")
     appendLine()

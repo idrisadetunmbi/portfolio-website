@@ -182,6 +182,7 @@ private fun ProjectItem(project: Project) {
                             .align(alignment = Alignment.TopEnd),
                         onClick = {
                             it.preventDefault()
+                            it.stopPropagation()
                             infoVisible = false
                         },
                     ) {
@@ -205,6 +206,7 @@ private fun ProjectItem(project: Project) {
                         modifier = ProjectInfoToggleButtonStyle.toModifier(),
                         onClick = {
                             it.preventDefault()
+                            it.stopPropagation()
                             infoVisible = true
                         },
                     ) {

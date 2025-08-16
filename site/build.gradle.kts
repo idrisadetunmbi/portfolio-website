@@ -29,16 +29,6 @@ kotlin {
             implementation(libs.kobweb.core)
             implementation(libs.kobweb.silk)
             implementation(libs.silk.icons.fa)
-
-            implementation(project.dependencies.platform(libs.koin.bom))
-            implementation(libs.koin.core)
-            implementation(libs.koin.compose)
-
-            implementation(libs.ktor.core)
-            implementation(libs.ktor.client.js)
-            implementation(libs.ktor.plugin.content.negotiation)
-            implementation(libs.ktor.kotlinx.serialization)
-            implementation(libs.ktor.plugin.logging)
         }
     }
 }

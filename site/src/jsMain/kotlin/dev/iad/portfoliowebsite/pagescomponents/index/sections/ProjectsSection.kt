@@ -11,6 +11,7 @@ import com.varabyte.kobweb.compose.css.TextTransform
 import com.varabyte.kobweb.compose.css.Transition
 import com.varabyte.kobweb.compose.css.WhiteSpace
 import com.varabyte.kobweb.compose.foundation.layout.Box
+import com.varabyte.kobweb.compose.foundation.layout.Column
 import com.varabyte.kobweb.compose.foundation.layout.Row
 import com.varabyte.kobweb.compose.ui.Alignment
 import com.varabyte.kobweb.compose.ui.Modifier
@@ -19,19 +20,15 @@ import com.varabyte.kobweb.compose.ui.modifiers.backgroundColor
 import com.varabyte.kobweb.compose.ui.modifiers.border
 import com.varabyte.kobweb.compose.ui.modifiers.borderRadius
 import com.varabyte.kobweb.compose.ui.modifiers.color
-import com.varabyte.kobweb.compose.ui.modifiers.display
 import com.varabyte.kobweb.compose.ui.modifiers.fillMaxSize
 import com.varabyte.kobweb.compose.ui.modifiers.fillMaxWidth
 import com.varabyte.kobweb.compose.ui.modifiers.fontSize
 import com.varabyte.kobweb.compose.ui.modifiers.height
-import com.varabyte.kobweb.compose.ui.modifiers.id
 import com.varabyte.kobweb.compose.ui.modifiers.letterSpacing
 import com.varabyte.kobweb.compose.ui.modifiers.lineHeight
 import com.varabyte.kobweb.compose.ui.modifiers.margin
 import com.varabyte.kobweb.compose.ui.modifiers.minWidth
 import com.varabyte.kobweb.compose.ui.modifiers.objectFit
-import com.varabyte.kobweb.compose.ui.modifiers.onMouseEnter
-import com.varabyte.kobweb.compose.ui.modifiers.onMouseLeave
 import com.varabyte.kobweb.compose.ui.modifiers.padding
 import com.varabyte.kobweb.compose.ui.modifiers.position
 import com.varabyte.kobweb.compose.ui.modifiers.right
@@ -68,7 +65,6 @@ import org.jetbrains.compose.web.css.CSSColorValue
 import org.jetbrains.compose.web.css.CSSUnit
 import org.jetbrains.compose.web.css.CSSUnitValueTyped
 import org.jetbrains.compose.web.css.Color
-import org.jetbrains.compose.web.css.DisplayStyle
 import org.jetbrains.compose.web.css.LineStyle
 import org.jetbrains.compose.web.css.Position
 import org.jetbrains.compose.web.css.cssRem
@@ -156,19 +152,11 @@ private fun ProjectItem(project: Project) {
     Link(
         path = project.link,
         openExternalLinksStrategy = OpenLinkStrategy.IN_NEW_TAB,
-        modifier = ProjectLinkStyle
-            .toModifier()
-            .onMouseEnter(listener = {
-                 infoVisible = true
-            })
-            .onMouseLeave(listener = {
-                 infoVisible = false
-            }),
+        modifier = ProjectLinkStyle.toModifier()
     ) {
         Box(
             modifier = ProjectContentContainerStyle.toModifier()
-                .then(other = if (infoVisible) Modifier.transform { rotateY(a = 180.deg) } else Modifier)
-                .id(value = "inner"),
+                .then(other = if (infoVisible) Modifier.transform { rotateY(a = 180.deg) } else Modifier),
         ) {
             if (infoVisible) {
                 Box(
@@ -176,16 +164,29 @@ private fun ProjectItem(project: Project) {
                         .toModifier()
                         .transform { rotateY(a = 180.deg) },
                 ) {
-                    SpanText(
-                        text = project.summary,
+                    Column(modifier = Modifier.fillMaxSize()) {
+                        VerticalSpacer(value = 1.25.cssRem)
+                        Box(modifier = Modifier.weight(value = 1)) {
+                            SpanText(
+                                text = project.summary,
+                                modifier = ProjectSummaryTextStyle
+                                    .toModifier()
+                                    .align(alignment = Alignment.Center),
+                            )
+                        }
+                    }
+
+                    Button(
                         modifier = Modifier
-                            .textAlign(textAlign = TextAlign.Center)
-                            .fontSize(value = 0.9375.cssRem)
-                            .lineHeight(value = 1.5.cssRem)
-                            .align(alignment = Alignment.Center)
-                            .whiteSpace(whiteSpace = WhiteSpace.PreLine)
-                            .padding(all = 1.cssRem),
-                    )
+                            .backgroundColor(color = Colors.Transparent)
+                            .align(alignment = Alignment.TopEnd),
+                        onClick = {
+                            it.preventDefault()
+                            infoVisible = false
+                        },
+                    ) {
+                        FaXmark(size = IconSize.LG)
+                    }
                 }
             } else {
                 Box(
@@ -200,33 +201,18 @@ private fun ProjectItem(project: Project) {
                             .size(size = 100.percent)
                             .objectFit(objectFit = ObjectFit.Contain),
                     )
+                    Button(
+                        modifier = ProjectInfoToggleButtonStyle.toModifier(),
+                        onClick = {
+                            it.preventDefault()
+                            infoVisible = true
+                        },
+                    ) {
+                        Box(modifier = ProjectInfoToggleButtonIconStyle.toModifier()) {
+                            FaInfo(size = IconSize.XS, modifier = Modifier.align(Alignment.Center))
+                        }
+                    }
                 }
-            }
-        }
-        if (infoVisible) {
-            Button(
-                modifier = BaseProjectInfoToggleButtonStyle.toModifier()
-                    .then(
-                        other = Modifier.size(size = 2.cssRem)
-                            .backgroundColor(color = Colors.Transparent)
-                    ),
-                onClick = {
-                    it.preventDefault()
-                    infoVisible = false
-                },
-            ) {
-                FaXmark(size = IconSize.LG)
-            }
-        } else {
-            Button(
-                modifier = BaseProjectInfoToggleButtonStyle.toModifier()
-                    .then(other = ProjectInfoToggleButtonStyle.toModifier()),
-                onClick = {
-                    it.preventDefault()
-                    infoVisible = true
-                },
-            ) {
-                FaInfo(size = IconSize.XS)
             }
         }
     }
@@ -276,36 +262,20 @@ val ProjectContentContainerStyle = CssStyle {
     }
 }
 
-val BaseProjectInfoToggleButtonStyle = CssStyle {
-    base {
-        Modifier
-            .position(position = Position.Absolute)
-            .top(value = .75.cssRem)
-            .right(value = 2.125.cssRem)
-            .color(color = colorMode.toSitePalette().content)
-            .minWidth(size = 0.cssRem)
-            .padding(all = 0.cssRem)
-    }
-    Breakpoint.MD {
-        Modifier.display(value = DisplayStyle.None)
-    }
-}
-
 val ProjectInfoToggleButtonStyle = CssStyle {
     base {
         Modifier
-            .border {
-                style(lineStyle = LineStyle.Solid)
-                color(color = colorMode.toSitePalette().content)
-                width(width = .1.cssRem)
-            }
-            .borderRadius(r = 100.percent)
-            .backgroundColor(color = colorMode.toSitePalette().contentAlt)
-            .size(size = 1.5.cssRem)
+            .position(position = Position.Absolute)
+            .top(value = 0.cssRem)
+            .right(value = 0.cssRem)
+            .color(color = colorMode.toSitePalette().content)
+            .minWidth(size = 0.cssRem)
+            .backgroundColor(color = Color.transparent)
+            .padding(all = .75.cssRem)
     }
 }
 
-val ProjectInfoUntoggleButtonStyle = CssStyle {
+val ProjectInfoToggleButtonIconStyle = CssStyle {
     base {
         Modifier
             .border {
@@ -324,6 +294,17 @@ val ProjectContentStyle = CssStyle {
         Modifier
             .position(position = Position.Absolute)
             .size(size = 100.percent)
+    }
+}
+
+val ProjectSummaryTextStyle = CssStyle {
+    base {
+        Modifier
+            .textAlign(textAlign = TextAlign.Center)
+            .fontSize(value = 0.875.cssRem)
+            .lineHeight(value = 1.35.cssRem)
+            .whiteSpace(whiteSpace = WhiteSpace.PreLine)
+            .padding(all = 1.cssRem)
     }
 }
 

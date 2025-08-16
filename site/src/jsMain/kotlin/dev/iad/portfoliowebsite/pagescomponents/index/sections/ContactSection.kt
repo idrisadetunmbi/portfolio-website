@@ -50,8 +50,6 @@ internal fun ContactSection() {
     var rootElementRef by remember { mutableStateOf<HTMLElement?>(value = null) }
 
     val handleSubmitClick: (SyntheticMouseEvent) -> Unit = {
-        it.preventDefault()
-
         val element = document.createElement(localName = "a")
         val anchorElement = (element as HTMLAnchorElement)
         anchorElement.href = createMailToLink(

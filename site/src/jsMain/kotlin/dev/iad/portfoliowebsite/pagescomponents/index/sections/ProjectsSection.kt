@@ -128,7 +128,6 @@ private fun ProjectFilterButton(
 ) {
     Button(
         onClick = {
-            it.preventDefault()
             onClick.invoke()
         },
         modifier = ProjectsFilterButtonStyle.toModifier()
@@ -195,7 +194,6 @@ private fun ProjectItem(project: Project) {
         Button(
             modifier = ProjectInfoToggleButtonStyle.toModifier(),
             onClick = {
-                it.preventDefault()
                 infoVisible = !infoVisible
             },
         ) {

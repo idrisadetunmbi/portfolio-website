@@ -39,7 +39,7 @@ import org.jetbrains.compose.web.css.percent
 import org.jetbrains.compose.web.css.vh
 
 private const val HEADLINE_TEXT =
-    "Software Engineer with 7+ Years of Experience Contributing to Cross-Functional Product Success \n\n"
+    "Software Engineer with 7+ Years of Experience Contributing to Cross-Functional Product Success"
 
 private const val SUBHEADLINE_TEXT =
     "Skilled in collaborating with product, backend, and data teams to build user-centric solutions that meet business goals—proven across diverse industries and teams."
@@ -94,6 +94,7 @@ internal fun AboutMeSection() {
                 text = HEADLINE_TEXT,
                 modifier = Modifier.fontSize(value = 1.125.cssRem),
             )
+            VerticalSpacer(value = 1.cssRem)
             SpanText(
                 text = SUBHEADLINE_TEXT,
                 modifier = Modifier.fontSize(value = .875.cssRem),

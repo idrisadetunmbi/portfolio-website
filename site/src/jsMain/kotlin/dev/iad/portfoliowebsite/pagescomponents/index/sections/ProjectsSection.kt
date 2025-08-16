@@ -15,7 +15,6 @@ import com.varabyte.kobweb.compose.foundation.layout.Column
 import com.varabyte.kobweb.compose.foundation.layout.Row
 import com.varabyte.kobweb.compose.ui.Alignment
 import com.varabyte.kobweb.compose.ui.Modifier
-import com.varabyte.kobweb.compose.ui.graphics.Colors
 import com.varabyte.kobweb.compose.ui.modifiers.backgroundColor
 import com.varabyte.kobweb.compose.ui.modifiers.border
 import com.varabyte.kobweb.compose.ui.modifiers.borderRadius
@@ -149,23 +148,23 @@ private fun ProjectFilterButton(
 private fun ProjectItem(project: Project) {
     var infoVisible by remember { mutableStateOf(value = false) }
 
-    Link(
-        path = project.link,
-        openExternalLinksStrategy = OpenLinkStrategy.IN_NEW_TAB,
-        modifier = ProjectLinkStyle.toModifier()
-    ) {
-        Box(
-            modifier = ProjectContentContainerStyle.toModifier()
-                .then(other = if (infoVisible) Modifier.transform { rotateY(a = 180.deg) } else Modifier),
+    Box(modifier = ProjectStyle.toModifier()) {
+        Link(
+            path = project.link,
+            openExternalLinksStrategy = OpenLinkStrategy.IN_NEW_TAB,
+            modifier = Modifier.fillMaxSize().color(color = Color.white),
         ) {
-            if (infoVisible) {
-                Box(
-                    modifier = ProjectContentStyle
-                        .toModifier()
-                        .transform { rotateY(a = 180.deg) },
-                ) {
-                    Column(modifier = Modifier.fillMaxSize()) {
-                        VerticalSpacer(value = 1.25.cssRem)
+            Box(
+                modifier = ProjectContentContainerStyle.toModifier()
+                    .then(other = if (infoVisible) Modifier.transform { rotateY(a = 180.deg) } else Modifier),
+            ) {
+                if (infoVisible) {
+                    Column(
+                        modifier = ProjectContentStyle
+                            .toModifier()
+                            .transform { rotateY(a = 180.deg) }
+                    ) {
+                        VerticalSpacer(value = 2.cssRem)
                         Box(modifier = Modifier.weight(value = 1)) {
                             SpanText(
                                 text = project.summary,
@@ -175,45 +174,39 @@ private fun ProjectItem(project: Project) {
                             )
                         }
                     }
-
-                    Button(
-                        modifier = Modifier
-                            .backgroundColor(color = Colors.Transparent)
-                            .align(alignment = Alignment.TopEnd),
-                        onClick = {
-                            it.preventDefault()
-                            it.stopPropagation()
-                            infoVisible = false
-                        },
+                } else {
+                    Box(
+                        modifier = ProjectContentStyle
+                            .toModifier()
+                            .backgroundColor(color = Color.white),
                     ) {
-                        FaXmark(size = IconSize.LG)
+                        Image(
+                            src = project.image,
+                            description = project.headline,
+                            modifier = Modifier
+                                .size(size = 100.percent)
+                                .objectFit(objectFit = ObjectFit.Contain),
+                        )
                     }
                 }
+            }
+        }
+
+        Button(
+            modifier = ProjectInfoToggleButtonStyle.toModifier(),
+            onClick = {
+                it.preventDefault()
+                infoVisible = !infoVisible
+            },
+        ) {
+            if (infoVisible) {
+                FaXmark(size = IconSize.LG)
             } else {
-                Box(
-                    modifier = ProjectContentStyle
-                        .toModifier()
-                        .backgroundColor(color = Color.white),
-                ) {
-                    Image(
-                        src = project.image,
-                        description = project.headline,
-                        modifier = Modifier
-                            .size(size = 100.percent)
-                            .objectFit(objectFit = ObjectFit.Contain),
+                Box(modifier = ProjectInfoToggleButtonIconStyle.toModifier()) {
+                    FaInfo(
+                        size = IconSize.XS,
+                        modifier = Modifier.align(alignment = Alignment.Center),
                     )
-                    Button(
-                        modifier = ProjectInfoToggleButtonStyle.toModifier(),
-                        onClick = {
-                            it.preventDefault()
-                            it.stopPropagation()
-                            infoVisible = true
-                        },
-                    ) {
-                        Box(modifier = ProjectInfoToggleButtonIconStyle.toModifier()) {
-                            FaInfo(size = IconSize.XS, modifier = Modifier.align(Alignment.Center))
-                        }
-                    }
                 }
             }
         }
@@ -230,14 +223,13 @@ val ProjectsGridStyle = CssStyle {
     }
 }
 
-val ProjectLinkStyle = CssStyle {
+val ProjectStyle = CssStyle {
     base {
         Modifier
             .fillMaxWidth()
             .height(size = 24.cssRem)
             .margin(bottom = 1.5.cssRem)
             .padding(leftRight = 1.5.cssRem)
-            .color(color = Color.white)
             .backgroundColor(color = Color.transparent)
             .position(position = Position.Relative)
     }
@@ -268,12 +260,18 @@ val ProjectInfoToggleButtonStyle = CssStyle {
     base {
         Modifier
             .position(position = Position.Absolute)
-            .top(value = 0.cssRem)
-            .right(value = 0.cssRem)
+            .top(value = 0.25.cssRem)
+            .right(value = 1.75.cssRem)
             .color(color = colorMode.toSitePalette().content)
             .minWidth(size = 0.cssRem)
             .backgroundColor(color = Color.transparent)
             .padding(all = .75.cssRem)
+    }
+
+    Breakpoint.MD {
+        Modifier
+            .top(value = 0.cssRem)
+            .right(value = 0.25.cssRem)
     }
 }
 

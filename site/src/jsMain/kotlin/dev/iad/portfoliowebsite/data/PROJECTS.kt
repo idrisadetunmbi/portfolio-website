@@ -36,8 +36,7 @@ val PROJECTS = listOf(
                 "Kotlin Coroutines (for async operations).\n\n" +
                 "It is one of the projects I adopted Jetpack Compose in at the early stages " +
                 "of the framework based on my experience and understanding of declarative UI frameworks and the benefits they " +
-                "bring to frontend engineering. " +
-                "The release garnered up to 15,000 downloads with minimal impediments to user experience reported.",
+                "bring to frontend engineering.",
     ),
     Project(
         image = "projects/aventine-alt.png",

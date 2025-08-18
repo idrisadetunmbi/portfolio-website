@@ -1,5 +1,6 @@
 site:
   title: "FE Dev Arch Template"
+  basePath: "portfolio-website"
 
 server:
   files:

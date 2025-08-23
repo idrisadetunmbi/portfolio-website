@@ -41,10 +41,9 @@ import org.jetbrains.compose.web.css.cssRem
 import org.jetbrains.compose.web.css.percent
 
 @Composable
-internal fun ResumeSection() {
+internal fun ExperiencesSection() {
     SectionScaffold(
-        title = "resume",
-        subtitle = "Companies I've worked with",
+        title = "experiences",
         backgroundColor = ColorMode.current.toSitePalette().backgroundAlt,
     ) {
         ExperiencesDesktopContent()

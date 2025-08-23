@@ -23,7 +23,7 @@ val PROJECTS = listOf(
                 "Headspace Care Flutter Mobile app to a web app. This resulted in increased user base and retention " +
                 "through providing an extra platform for product access. \n\n" +
                 "I also worked in a three-person engineering sub-team to redevelop the content system, a large part of " +
-                "the app, resulting in a more scalable, higher quality of the system and, in effect, a better user experience."
+                "the app, resulting in a more scalable, higher quality of the system and, in effect, a better user experience.",
     ),
     Project(
         image = "projects/autochek.png",

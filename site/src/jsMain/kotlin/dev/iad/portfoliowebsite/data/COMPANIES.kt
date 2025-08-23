@@ -11,9 +11,9 @@ internal val EXPERIENCES = listOf(
         start = "2022"
     ),
     Experience(
-        company = "Headspace Care",
+        company = "Headspace Health (formerly Ginger)",
         position = "Senior Software Engineer",
-        summary = "In addition to developing and improving the Ginger Care mobile app, handling features including user and content management, I created and reviewed technical design documents, resolved user issues and enhanced their experiences through journey analysis and logging.",
+        summary = "Contributed to the Ginger Care mobile app, working on features including user and content management. In addition, I participated in implementing technical projects that resulted in increased user base and improved dev experience.",
         end = "2022",
         start = "2021"
     ),

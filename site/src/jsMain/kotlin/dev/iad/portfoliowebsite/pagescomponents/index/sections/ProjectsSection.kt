@@ -78,7 +78,6 @@ internal fun ProjectsSection() {
     var displayedProjectsType: Project.Type by remember { mutableStateOf(value = Project.Type.ALL) }
     SectionScaffold(
         title = "projects",
-        subtitle = "Projects I've worked on",
     ) {
         Row {
             Project.Type.entries.forEach { projectType ->
@@ -121,33 +120,13 @@ internal fun ProjectsSection() {
 }
 
 @Composable
-private fun ProjectFilterButton(
-    name: String,
-    isActiveProject: Boolean,
-    onClick: () -> Unit,
+private fun ProjectItem(
+    project: Project,
+    modifier: Modifier = Modifier,
 ) {
-    Button(
-        onClick = {
-            onClick.invoke()
-        },
-        modifier = ProjectsFilterButtonStyle.toModifier()
-            .then(
-                other = if (isActiveProject) {
-                    projectTypeSelectorHighlightModifier(color = ColorMode.current.toSitePalette().contentAlt)
-                } else {
-                    Modifier
-                }
-            ),
-    ) {
-        Text(value = name)
-    }
-}
-
-@Composable
-private fun ProjectItem(project: Project) {
     var infoVisible by remember { mutableStateOf(value = false) }
 
-    Box(modifier = ProjectStyle.toModifier()) {
+    Box(modifier = modifier.then(other = ProjectStyle.toModifier())) {
         Link(
             path = project.link,
             openExternalLinksStrategy = OpenLinkStrategy.IN_NEW_TAB,
@@ -208,6 +187,30 @@ private fun ProjectItem(project: Project) {
                 }
             }
         }
+    }
+}
+
+@Composable
+private fun ProjectFilterButton(
+    name: String,
+    isActiveProject: Boolean,
+    onClick: () -> Unit,
+) {
+    Button(
+        onClick = {
+            it.preventDefault()
+            onClick.invoke()
+        },
+        modifier = ProjectsFilterButtonStyle.toModifier()
+            .then(
+                other = if (isActiveProject) {
+                    projectTypeSelectorHighlightModifier(color = ColorMode.current.toSitePalette().contentAlt)
+                } else {
+                    Modifier
+                }
+            ),
+    ) {
+        Text(value = name)
     }
 }
 

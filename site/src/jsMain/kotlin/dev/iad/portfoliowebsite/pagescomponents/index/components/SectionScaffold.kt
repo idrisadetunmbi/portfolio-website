@@ -1,7 +1,6 @@
 package dev.iad.portfoliowebsite.pagescomponents.index.components
 
 import androidx.compose.runtime.Composable
-import com.varabyte.kobweb.compose.css.FontWeight
 import com.varabyte.kobweb.compose.css.TextTransform
 import com.varabyte.kobweb.compose.foundation.layout.Box
 import com.varabyte.kobweb.compose.foundation.layout.Column
@@ -11,7 +10,6 @@ import com.varabyte.kobweb.compose.ui.Modifier
 import com.varabyte.kobweb.compose.ui.modifiers.backgroundColor
 import com.varabyte.kobweb.compose.ui.modifiers.fillMaxWidth
 import com.varabyte.kobweb.compose.ui.modifiers.fontSize
-import com.varabyte.kobweb.compose.ui.modifiers.fontWeight
 import com.varabyte.kobweb.compose.ui.modifiers.height
 import com.varabyte.kobweb.compose.ui.modifiers.letterSpacing
 import com.varabyte.kobweb.compose.ui.modifiers.maxWidth
@@ -27,7 +25,6 @@ import org.jetbrains.compose.web.css.percent
 @Composable
 internal fun SectionScaffold(
     title: String,
-    subtitle: String,
     backgroundColor: CSSColorValue = Color.transparent,
     content: @Composable ColumnScope.() -> Unit,
 ) {
@@ -51,16 +48,8 @@ internal fun SectionScaffold(
                     .fontSize(value = .75.cssRem)
                     .letterSpacing(value = .125.cssRem),
             )
-            Box(modifier = Modifier.height(size = .5.cssRem))
-            HorizontalDivider(modifier = Modifier.width(1.5.cssRem))
-            Box(modifier = Modifier.height(size = .5.cssRem))
-            Box(modifier = Modifier.height(size = .5.cssRem))
-            SpanText(
-                text = subtitle,
-                modifier = Modifier
-                    .fontSize(value = 1.375.cssRem)
-                    .fontWeight(value = FontWeight.Light),
-            )
+            Box(modifier = Modifier.height(size = 2.cssRem))
+            HorizontalDivider(modifier = Modifier.width(size = 1.5.cssRem))
             Box(modifier = Modifier.height(size = 3.cssRem))
             content()
             Box(modifier = Modifier.height(size = 6.5.cssRem))

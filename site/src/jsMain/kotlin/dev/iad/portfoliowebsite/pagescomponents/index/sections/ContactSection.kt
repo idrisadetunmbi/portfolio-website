@@ -64,7 +64,6 @@ internal fun ContactSection() {
 
     SectionScaffold(
         title = "contact",
-        subtitle = "Let's build together.",
         backgroundColor = ColorMode.current.toSitePalette().backgroundAlt,
     ) {
         Column(

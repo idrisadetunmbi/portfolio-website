@@ -1,6 +1,6 @@
 site:
   title: "Idris Adetunmbi - Software Engineer"
-  basePath: "portfolio-website"
+  basePath: ""
 
 server:
   files:
